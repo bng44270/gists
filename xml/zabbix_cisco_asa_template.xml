@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2020-08-31T18:37:03Z</date>
+    <groups>
+        <group>
+            <name>Networking</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Cisco ASA Custom</template>
+            <name>Cisco ASA Custom</name>
+            <groups>
+                <group>
+                    <name>Networking</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Discovered CPUs</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#CPIID}, .1.3.6.1.4.1.9.9.109.1.1.1.1.2]</snmp_oid>
+                    <key>cpu.discovery</key>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>CPU 5 Minute Average ({#CPIID})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.4.1.9.9.109.1.1.1.1.8.{#SNMPINDEX}</snmp_oid>
+                            <key>cpufivemin[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>CPU 1 Minute Average ({#CPIID})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.4.1.9.9.109.1.1.1.1.7.{#SNMPINDEX}</snmp_oid>
+                            <key>cpuonemin[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Discovered Memory</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#MEMDESCR}, 1.3.6.1.4.1.9.9.48.1.1.1.2]</snmp_oid>
+                    <key>memory.discovery</key>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Memory Free ({#MEMDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.4.1.9.9.48.1.1.1.6.{#SNMPINDEX}</snmp_oid>
+                            <key>memfree[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Memory Total ({#MEMDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>memototal[{#SNMPINDEX}]</key>
+                            <params>last(&quot;memused[{#SNMPINDEX}]&quot;)+last(&quot;memfree[{#SNMPINDEX}]&quot;)</params>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Memory Used ({#MEMDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.4.1.9.9.48.1.1.1.5.{#SNMPINDEX}</snmp_oid>
+                            <key>memused[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>Memory ({#MEMDESCR})</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>DASHED_LINE</drawtype>
+                                    <color>F63100</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>memototal[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>memfree[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>memused[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Discovered Interfaces</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#IFDESCR}, .1.3.6.1.2.1.2.2.1.2]</snmp_oid>
+                    <key>net.if.discovery</key>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Discards In ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifDiscardsInRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifDiscardsIn[{#SNMPINDEX}]&quot;)-last(&quot;ifDiscardsIn[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Discards In ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}</snmp_oid>
+                            <key>ifDiscardsIn[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Discards Out ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifDiscardsOutRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifDiscardsOut[{#SNMPINDEX}]&quot;)-last(&quot;ifDiscardsOut[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Discards Out ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}</snmp_oid>
+                            <key>ifDiscardsOut[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Errors In ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifErrorsInRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifErrorsIn[{#SNMPINDEX}]&quot;)-last(&quot;ifErrorsIn[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Errors In ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}</snmp_oid>
+                            <key>ifErrorsIn[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Errors Out ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifErrorsOutRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifErrorsOut[{#SNMPINDEX}]&quot;)-last(&quot;ifErrorsOut[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Errors Out ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}</snmp_oid>
+                            <key>ifErrorsOut[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Bytes In ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifOctetInRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifOctetIn[{#SNMPINDEX}]&quot;)-last(&quot;ifOctetIn[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Bytes In ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.10.{#SNMPINDEX}</snmp_oid>
+                            <key>ifOctetIn[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Bytes Out ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifOctetOutRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifOctetOut[{#SNMPINDEX}]&quot;)-last(&quot;ifOctetOut[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Bytes Out ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.16.{#SNMPINDEX}</snmp_oid>
+                            <key>ifOctetOut[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Unicast Packets In ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifUnicastInRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifUnicastIn[{#SNMPINDEX}]&quot;)-last(&quot;ifUnicastIn[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Unicast Packets In ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.11.{#SNMPINDEX}</snmp_oid>
+                            <key>ifUnicastIn[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Unicast Packets Out ({#IFDESCR})</name>
+                            <type>CALCULATED</type>
+                            <key>ifUnicastOutRT[{#SNMPINDEX}]</key>
+                            <params>last(&quot;ifUnicastOut[{#SNMPINDEX}]&quot;)-last(&quot;ifUnicastOut[{#SNMPINDEX}]&quot;,#2)</params>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return (value &lt; 0) ? value * -1 : value;</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Cumulative Unicast Packets Out ({#IFDESCR})</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.2.1.2.2.1.17.{#SNMPINDEX}</snmp_oid>
+                            <key>ifUnicastOut[{#SNMPINDEX}]</key>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>Bytes ({#IFDESCR})</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifOctetInRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>F63100</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifOctetOutRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>Packet Stats ({#IFDESCR})</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>FC6EA3</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifUnicastInRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>6C59DC</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifUnicastOutRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <color>F63100</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifDiscardsInRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifDiscardsOutRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>4</sortorder>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifErrorsInRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>5</sortorder>
+                                    <color>A54F10</color>
+                                    <item>
+                                        <host>Cisco ASA Custom</host>
+                                        <key>ifErrorsOutRT[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>
