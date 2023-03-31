@@ -1,8 +1,8 @@
 # Repository of Gists  
-<https://gist.github.com/bng44270>
-- apple 
+<https://gist.github.com/bng44270> 
+- apple  
 |-- genssh.applescript - Generate SSH Key Pairs with AppleScript  
-- bash 
+- bash  
 |-- aem-listpage-package.sh - Download AEM packages from listpage tool  
 |-- auto-ucspi-tcp.sh - Automatically Download and Build ucspi-tcp  
 |-- bacon.sh - Ipsum Bacon in Bash  
@@ -81,23 +81,22 @@
 |-- xbright.sh - Adjust XWindows brightness  
 |-- xnest.sh - Launch nested X windows session  
 |-- xrotate.sh - Rotate XWindows display  
-- c 
+- c  
 |-- deftype.c - Custom Type Definitions in C  
 |-- xsdispinfo.c - Show X Windows Display Information with easily parsable output  
-- csharp 
+- csharp  
 |-- ConfigFile.cs - Configuration File Reader for C#  
-- google-script 
+- google-script  
 |-- callhandler.gs - Streamline the creation of API Endpoints on Google Script  
 |-- ifttt.gs - Call IFTTT Webhooks from Google Scripts  
 |-- notification.gs - Notification Class for use with Google Script  
 |-- sheetlog.gs - Add log entries to a Google Sheet  
 |-- work.gs - Google App Script Framework to create and manage business processes within Google Drive  
-- javascript 
+- javascript  
 |-- arguments.js - Easily Parse URL Arguments as string, integer, float, date, or JSON  
 |-- datadef.js - Create a schema-enforced data structure based on the Array object  
 |-- DOMObject.js - Dump DOM into simplified object  
 |-- domterm.js - Create Custom Interactive Command-line Interface with JavaScript (ES6)
-Create Custom Interactive Command-line Interface with JavaScript  
 |-- dragdoc.js - Implement Drag-Scroll functionality for a DOM container  
 |-- formauto.js - Generate DOM Forms with JavaScript (ES6)  
 |-- FormAuto.js - Generate DOM Forms with JavaScript  
@@ -121,25 +120,24 @@ Create Custom Interactive Command-line Interface with JavaScript
 |-- SecureCatalogValidation.js - Secure Access to RITM/RITM Task in ServiceNow  
 |-- slideomatic.js - Create custom slideshows with JavaScript  
 |-- tdf.js - JSON schema/data editor in JavaScript (ES6)
-JSON schema/data editor in JavaScript  
 |-- webnotepad.js - Create a local-storage browser-based notepad  
 |-- webrequest.js - Promise-based HTTP Request/Response library (ES6)  
-- legacy 
+- legacy  
 |-- bounce.bas - Fun bouncing graphics in QBasic  
-- linux 
+- linux  
 |-- ddwrt.conf - Reverse Proxy DD-WRT through Apache  
 |-- eol-convert.awk - Convert text files between Mac, Unix, and Windows  
 |-- Makefile - Makefile macros  
 |-- monit.conf - Reverse Proxy Monit through Apache  
 |-- vimrc - Custom config for vim and gvim including Git and Filesystem functions  
 |-- wsgi-macro.conf - Create Python WSGI Applications in Apache  
-- powershell 
+- powershell  
 |-- misc.ps1 - Various useful PowerShell functions  
 |-- NppUtils.ps1 - Create Notepad++ projects based on folder structure  
 |-- password.ps1 - Generate Random passwords using PowerShell  
 |-- servicenow_table.ps1 - ServiceNow Table API Library for Powershell  
 |-- snupdateset.ps1 - Browse ServiceNow Update Set XML files  
-- python 
+- python  
 |-- arguments.py - Easily use command-line arguments with Python  
 |-- arin.py - Search ARIN for IP address or ASN  
 |-- asn2ip.py - Use ARIN to translate ASN to IP address  
@@ -168,10 +166,10 @@ JSON schema/data editor in JavaScript
 |-- usanalyze.py - ServiceNow Update Set Analyzer  
 |-- uscbgeocoder.py - Perform Address-to-LatLng geocoding using US Census Bureau API  
 |-- xlscodes.py - Generate Excel function to translate field values  
-- windows 
+- windows  
 |-- hostsfile.bat - Edit hosts file on Windows  
 |-- zabbix-agent-installer.bat - Install Zabbix Agent on Windows  
-- xml 
+- xml  
 |-- keycode.html - Get JavaScript keycodes including Shift, Control and Alt combos  
 |-- roundsite.xsl - Responsive Website Template (rounded corners)  
 |-- zabbix_cisco_asa_template.xml - Zabbix Template for Cisco ASA  
