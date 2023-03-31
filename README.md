@@ -1,4 +1,4 @@
-** Repository of Gists  
+# Repository of Gists  
 <https://gist.github.com/bng44270>
 - apple 
 |-- genssh.applescript - Generate SSH Key Pairs with AppleScript  
