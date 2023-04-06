@@ -1,5 +1,5 @@
 /*
-  Update Repository Files using Github API
+  Update Files using Github API
   
   Requires webrequest.js (https://gist.github.com/bng44270/61122a1947591d50004fcd9ee72d643d)
   
