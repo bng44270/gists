@@ -1,5 +1,5 @@
 /*
-  Update Files using Github API using Google Script
+  Update Files using Github API from Google Script
   
   Installation:
 
