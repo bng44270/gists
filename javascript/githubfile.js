@@ -5,21 +5,23 @@
   
   Usage:
   
-    var gh = new GithubFile('API-TOKEN','USERNAME','EMAIL-ADDRESS');
+    Usage:
+  
+    Instantiate the object:
     
-    var prFile = gh.getFile('REPOSITORY','FILE-PATH');
-    prFile.then(file => {
-      var prUpdate = gh.UpdateFile('REPOSITORY','FILE-PATH',file['sha'],'COMMIT-MESSAGE','NEW FILE CONTENT');
-      prUpdate.then(resp => {
-        if (resp.status == 200) {
-          console.log("Successfully update file");
-        }
-        else {
-          console.log("Error updating file");
-          console.log(JSON.stringify(resp));
-        }
-      });
-    });
+      var gh = new GithubFile('API-TOKEN','USERNAME','EMAIL-ADDRESS');
+
+    Get information on a repository entry (returns same object as Github REST API "Get Repository Content"):
+
+      gh.getEntry("<repository-name","<file-path>");
+
+    For details on getEntry return value, see https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-repository-content
+
+    To update a file in a repository:
+
+      gh.updateFile("<repository-name>","<file-path>","<file-SHA>","<commit-message>","<new-file-content>");
+    
+    Note that the <file-SHA> is an element of the object returned by getEntry()
     
 */
 
