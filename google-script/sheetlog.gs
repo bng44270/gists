@@ -4,7 +4,7 @@
   
   Requirements:
 
-    Create two system properties, log_file and log_sheet, which contain the file ID of the spreadsheet
+    Create two script properties, log_file and log_sheet, which contain the file ID of the spreadsheet
     and the sheet containing the log respectively
   
     The first row of the spreadsjeet is reserved for column headers
