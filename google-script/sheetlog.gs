@@ -3,6 +3,9 @@
   Logs a row of data point to Google Sheets
   
   Requirements:
+
+    Create two system properties, log_file and log_sheet, which contain the file ID of the spreadsheet
+    and the sheet containing the log respectively
   
     The first row of the spreadsjeet is reserved for column headers
     
@@ -11,7 +14,7 @@
 
   Usage:
 
-    var log = new SheetLog('FILE-ID','SHEET-NAME');
+    var log = new SheetLog();
     log.write(['col1','col2','col3','col4']);
     log.write(['new-col1','new-col2','new-col3','new-col4']);
     
@@ -20,7 +23,10 @@
 */
 
 class SheetLog {
-  constructor(fileId,sheetName) {
+  constructor() {
+    var fileId = ScriptProperties.getProperty('log_file');
+    var sheetName = ScriptProperties.getProperty('log_sheet');
+
     var ss = SpreadsheetApp.openById(fileId);
     this.log = ss.getSheetByName(sheetName);
   }
@@ -32,6 +38,7 @@ class SheetLog {
         [this.getNowDate()].concat(p)
       ]);
       return p;
+    }
     catch(e) {
       return false;
     }   
