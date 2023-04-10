@@ -4,6 +4,10 @@ GsIFTTT
 
 Call IFTTT Webhooks from Google Scripts
 
+Setup:
+
+    Add a Script Property to your project named "ifttt_key" to store your IFTTT API Key
+
 Usage:
 
     var ifttt = new GsIFTTT('key');
@@ -18,7 +22,7 @@ Usage:
 
 class GsIFTTT {
 	constructor(key) {
-		this.key = key;
+		this.key = ScriptProperties.getProperty('ifttt_key');
 		this.config = null;
 	}
 
