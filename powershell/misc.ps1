@@ -66,7 +66,7 @@ function Get-ADUserAccountControl($Identity) {
   return $uac_str_ar
 }
 
-function Get-ADComputerInSubjet($SearchBase,$Subnets) {
+function Get-ADComputerInSubnet($SearchBase,$Subnets) {
   $returnAr = @()
 	
 	Get-ADComputer -SearchBase $SearchBase -Filter *  | ForEach-Object {
