@@ -33,9 +33,9 @@
 
 class GithubFile {
   constructor() {
-    this.USER = ScriptProperties.getProperty('github_user');;
-    this.EMAIL = ScriptProperties.getProperty('github_email');;
-    this.TOKEN = ScriptProperties.getProperty('github_token');;
+    this.USER = PropertiesService.getScriptProperties().getProperty('github_user');;
+    this.EMAIL = PropertiesService.getScriptProperties().getProperty('github_email');;
+    this.TOKEN = PropertiesService.getScriptProperties().getProperty('github_token');;
   }
   		
   getEntry(repo,filepath) {
